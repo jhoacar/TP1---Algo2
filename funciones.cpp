@@ -2,13 +2,10 @@
 #define FUNCIONES_CPP
 
 #include "funciones.h"
-#include "manipulacion_datos.h"
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <string>
-using namespace std;
 
 const char* CUADRANTES = "NO no NE ne SO so SE se";
 const char* RESPUESTAS = "Y YES Yes yes SI Si si";
