@@ -1,18 +1,9 @@
 #ifndef ELEMENTOS_H
 #define ELEMENTOS_H
-
 #include <string>
 using namespace std;
 
 const int MAX_NOMBRE = 50;
-const int LIMITES_NORTE[2]  = {1,300};
-const int LIMITES_SUR[2]    = {301,600};
-const int LIMITES_ESTE[2]   = {501,1000};
-const int LIMITES_OESTE[2]  = {1,500};
-const char* CAZADOR 	= "CV";
-const char* VAMPIROS 	= "Nosferatu Vampirella vampiro";
-const char* HUMANOS 	= "humano Vanesa";
-const char* ZOMBIES 	= "zombi zombies";
 
 typedef struct coord{
 	int x;

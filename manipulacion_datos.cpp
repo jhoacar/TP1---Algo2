@@ -3,9 +3,7 @@
 
 #include "manipulacion_datos.h"
 #include "funciones.h"
-#include "funciones.cpp"
 #include "elementos.h"
-#include "elementos.cpp"
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -18,7 +16,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_agua(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_aguas)
-		encontrado=!strcmpi(datos.aguas[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.aguas[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -29,7 +27,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_bala(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_balas)
-		encontrado=!strcmpi(datos.balas[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.balas[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -40,7 +38,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_cruz(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_cruces)
-		encontrado=!strcmpi(datos.cruces[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.cruces[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -51,7 +49,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_estaca(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_estacas)
-		encontrado=!strcmpi(datos.estacas[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.estacas[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -62,7 +60,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_escopeta(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_escopetas)
-		encontrado=!strcmpi(datos.escopetas[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.escopetas[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -73,7 +71,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_zombie(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_zombies)
-		encontrado=!strcmpi(datos.zombis[i++].cuadrante,cuadrante.c_str());
+		encontrado=!strcmp(datos.zombis[i++].cuadrante,cuadrante.c_str());
 	
 	return encontrado;
 }
@@ -83,9 +81,12 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 */
 bool buscar_humano(datos_t datos,string cuadrante,const char *nombre_humano){
 	int i=0;bool encontrado=false;
+	bool cazador = !strcmpi(nombre_humano,"cazador");
 	while(!encontrado&&i++<datos.cantidad_humanos)
-		encontrado=!strcmpi(datos.humanos[i].cuadrante,cuadrante.c_str())&&!strcmpi(datos.humanos[i].nombre,nombre_humano);
-	
+		encontrado=	cazador&&
+					datos.humanos[i].cazador&&
+					!strcmp(datos.humanos[i].cuadrante,cuadrante.c_str())&&
+					!strcmp(datos.humanos[i].nombre,nombre_humano);
 	return encontrado;
 }
 /*
@@ -95,7 +96,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_vampiro(datos_t datos,string cuadrante,const char *nombre_vampiro){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i++<datos.cantidad_vampiros)
-		encontrado=!strcmpi(datos.vampiros[i].cuadrante,cuadrante.c_str())&&!strcmpi(datos.vampiros[i].nombre,nombre_vampiro);
+		encontrado=!strcmp(datos.vampiros[i].cuadrante,cuadrante.c_str())&&!strcmp(datos.vampiros[i].nombre,nombre_vampiro);
 	
 	return encontrado;
 }

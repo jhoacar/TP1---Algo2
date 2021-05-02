@@ -2,7 +2,7 @@
 #define FUNCIONES_CPP
 
 #include "funciones.h"
-#include "manipulacion_datos.cpp"
+#include "manipulacion_datos.h"
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
@@ -10,6 +10,10 @@
 #include <string>
 using namespace std;
 
+void mayuscula(string &cadena){
+	for(size_t i=0;i<cadena.length();i++)
+		cadena[i] = (cadena[i]>='a'&&cadena[i]<='z')?'A'+(cadena[i]-'a'):cadena[i];
+}
 /*
 Pre: Un nombre del fichero a abrir
 Post: Devuelve la informacion del fichero en formato string
@@ -56,7 +60,7 @@ Pre: datos previamente cargados, una cadena con el cuadrante a buscar y la opcio
 Post: devuelve verdadero si encuentra el objeto con el cuadrante y falso en caso contrario
 */
 bool buscar(datos_t datos,string cuadrante,int opcion){
-	
+	mayuscula(cuadrante);
 	switch(opcion){
     	case AGUA: 				return buscar_agua(datos,cuadrante);
     	case BALA: 				return buscar_bala(datos,cuadrante);
@@ -65,10 +69,10 @@ bool buscar(datos_t datos,string cuadrante,int opcion){
     	case ESCOPETA: 			return buscar_escopeta(datos,cuadrante);
     	case HUMANO: 			return buscar_humano(datos,cuadrante,"humano");
     	case HUMANO_CAZADOR: 	return buscar_humano(datos,cuadrante,"cazador");
-    	case VANESA: 			return buscar_humano(datos,cuadrante,"vanesa");
-    	case VAMPIRO: 			return buscar_vampiro(datos,cuadrante,"vampiro");
-    	case VAMPIRELLA:		return buscar_vampiro(datos,cuadrante,"vampirella");
-    	case NOSFERATU:			return buscar_vampiro(datos,cuadrante,"nosferatu");
+    	case VANESA: 			return buscar_humano(datos,cuadrante,"Vanesa");
+    	case VAMPIRO: 			return buscar_vampiro(datos,cuadrante,"Vampiro");
+    	case VAMPIRELLA:		return buscar_vampiro(datos,cuadrante,"Vampirella");
+    	case NOSFERATU:			return buscar_vampiro(datos,cuadrante,"Nosferatu");
     	case ZOMBIE:			return buscar_zombie(datos,cuadrante);
 	}
 }

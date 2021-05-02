@@ -4,13 +4,29 @@
 #include "elementos.h"
 #include <cstdlib>
 #include <cstring>
+const int LIMITES_NORTE[2]  = {1,300};
+const int LIMITES_SUR[2]    = {301,600};
+const int LIMITES_ESTE[2]   = {501,1000};
+const int LIMITES_OESTE[2]  = {1,500};
+const char *NORTE_OESTE = "NO";
+const char *SUR_OESTE 	= "SO";
+const char *NORTE_ESTE	= "NE";
+const char *SUR_ESTE 	= "SE";
+const char* CAZADOR 	= "CV";
+const char* VAMPIROS 	= "Nosferatu Vampirella vampiro";
+const char* HUMANOS 	= "humano HUMANO Vanesa";
+const char* ZOMBIES 	= "zombi zombies";
+const char* AGUA = "Agua AGUA agua";
+const char* BALA = "Bala BALA bala";
+const char* ESCOPETA = "Escopeta ESCOPETA escopeta";
+const char* ESTACA = "Estaca ESTACA estaca";
+const char* CRUZ = "Cruz CRUZ cruz";
 
 /*
 Pre: una cadena con la informacion a extraer y su delimitador
 Post: devuelve las coordenadas de la informacion extraida con su delimitador 
 */
 coord_t obtener_coordenadas(char cadena[],const char *delim){
-	if(cadena==NULL) return {0,0};
 	char copia[strlen(cadena)];
 	strcpy(copia,cadena);	
 	coord_t coord = {atoi(strtok(copia,delim)),atoi(strtok(NULL,delim))};
@@ -42,42 +58,42 @@ Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena agua
 */
 bool es_agua(const char *nombre){
-	return !strcmpi(nombre,"agua");
+	return strstr(AGUA,nombre);
 }
 /*
 Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena bala
 */
 bool es_bala(const char *nombre){
-	return !strcmpi(nombre,"bala");
+	return strstr(BALA,nombre);
 }
 /*
 Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena estaca
 */
 bool es_estaca(const char *nombre){
-    return !strcmpi(nombre,"estaca");
+    return strstr(ESTACA,nombre);
 }
 /*
 Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena escopeta
 */
 bool es_escopeta(const char *nombre){
-	return !strcmpi(nombre,"escopeta");
+	return strstr(ESCOPETA,nombre);
 }
 /*
 Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena cruz
 */
 bool es_cruz(const char *nombre){
-	return !strcmpi(nombre,"cruz");
+	return strstr(CRUZ,nombre);
 }
 /*
 Pre: una cadena a comparar
 Post: verdadero si coincide con la cadena cazador
 */
 bool es_cazador(const char *nombre){
-	return !strcmpi(nombre,CAZADOR);
+	return strstr(CAZADOR,nombre);
 }
 /*
 Pre: una coordenada cargada
@@ -113,10 +129,10 @@ Post: carga en la cadena la informacion del cuadrante que corresponde
 */
 void cargar_cuadrante(char cuadrante[],coord_t coordenada){
 	const char *info=" \0";
-    info = esta_Norte(coordenada) && esta_Oeste(coordenada)? "NO":info;
-    info = esta_Norte(coordenada) && esta_Este(coordenada) ? "NE":info;
-    info = esta_Sur(coordenada)   && esta_Oeste(coordenada)? "SO":info;
-    info = esta_Sur(coordenada)   && esta_Este(coordenada) ? "SE":info;
+    info = esta_Norte(coordenada) && esta_Oeste(coordenada)? NORTE_OESTE:info;
+    info = esta_Norte(coordenada) && esta_Este(coordenada) ? NORTE_ESTE:info;
+    info = esta_Sur(coordenada)   && esta_Oeste(coordenada)? SUR_OESTE:info;
+    info = esta_Sur(coordenada)   && esta_Este(coordenada) ? SUR_ESTE:info;
     strcpy(cuadrante,info);
 }
 /*
