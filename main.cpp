@@ -14,9 +14,11 @@ int main() {
   		cout<<"No se pudo cargar datos del "<<nombre_archivo<<endl;
 		return 1;	
 	}
-	mostrar_datos(datos);
 	mostrar_resumen(datos);
-  	mostrar_menu(datos);
+  	cout<<"Presione una tecla para continuar...";
+	cin.get();
+	system("clear");
+	mostrar_menu(datos);
   	
   	eliminar_arrays(&datos);
   	return 0;

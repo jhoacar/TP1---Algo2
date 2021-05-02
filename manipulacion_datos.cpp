@@ -214,29 +214,21 @@ void cargar_objetos_a_datos(objeto_t objetos[],size_t cantidad,datos_t *datos){
 		extra=extra?extra:"NO_HAY";
 		
 		if(es_humano(nombre))
-			cargar_humano(extra,objetos[i],datos->humanos[pos_humano++]);
-			
+			cargar_humano(extra,objetos[i],datos->humanos[pos_humano++]);	
 		if(es_zombi(nombre))
 			cargar_zombie(objetos[i],datos->zombis[pos_zombie++]);
-			
 		if(es_vampiro(nombre))
 			cargar_vampiro(objetos[i],datos->vampiros[pos_vampiro++]);
-			
 		if(es_agua(nombre))
 			cargar_agua(extra,objetos[i],datos->aguas[pos_agua++]);
-			
 		if(es_bala(nombre))
 			cargar_bala(extra,objetos[i],datos->balas[pos_bala++]);
-		
 		if(es_estaca(nombre))
 			cargar_estaca(objetos[i],datos->estacas[pos_estaca++]);
-		
 		if(es_escopeta(nombre))
 			cargar_escopeta(objetos[i],datos->escopetas[pos_escopeta++]);
-			
 		if(es_cruz(nombre))
 			cargar_cruz(objetos[i],datos->cruces[pos_cruz++]);
-		
 	}
 }
 /*
@@ -248,33 +240,24 @@ void contar_objetos(objeto_t objetos[],size_t cantidad_info,char info[][MAX_DATO
 	for(size_t i=0;i<cantidad_info;i++){
 		
 		guardar_objeto(objetos[i],info[i]);
-		
 		char *nombre = strtok(info[i]," ");
 		
 		if(es_humano(nombre))
-			datos->cantidad_humanos+=1;	
-			
+			datos->cantidad_humanos+=1;			
 		if(es_zombi(nombre))
 			datos->cantidad_zombies+=1;
-			
 		if(es_vampiro(nombre))
 			datos->cantidad_vampiros+=1;
-			
 		if(es_agua(nombre))
 			datos->cantidad_aguas+=1;
-			
 		if(es_bala(nombre))
 			datos->cantidad_balas+=1;
-		
 		if(es_estaca(nombre))
 			datos->cantidad_estacas+=1;
-			
 		if(es_escopeta(nombre))
 			datos->cantidad_escopetas+=1;
-			
 		if(es_cruz(nombre))
 			datos->cantidad_cruces+=1;
-			
 	}
 }
 /*
@@ -288,24 +271,21 @@ bool cargar_datos_fichero(datos_t *datos,const char *nombre_fichero){
 	string texto = obtener_texto(nombre_fichero);
 	
 	if(!texto.c_str()){
-		cout<<"Error al obtener el texto del fichero: "<<nombre_fichero<<endl;
+		cout<<"Error al obtener el texto del fichero: "<<nombre_fichero<<endl; 
 		return false;
 	}
 	
-	size_t cantidad_datos = obtener_cant_division(texto.c_str(),"\n");
+	const size_t cantidad_datos = obtener_cant_division(texto.c_str(),"\n");
 	char info[cantidad_datos][MAX_DATOS];
 	dividir(texto.c_str(),"\n",cantidad_datos,info);
-	
 	objeto_t objetos[cantidad_datos];
-
 	contar_objetos(objetos,cantidad_datos,info,datos);
-	
 	inicializar_arrays(datos);
-	
 	cargar_objetos_a_datos(objetos,cantidad_datos,datos);
 	
 	cout<<"Datos cargados!"<<endl;
 	
+	system("clear");
 	return true;
 }
 

@@ -27,7 +27,8 @@ Pre: una cadena con la informacion a extraer y su delimitador
 Post: devuelve las coordenadas de la informacion extraida con su delimitador 
 */
 coord_t obtener_coordenadas(char cadena[],const char *delim){
-	char copia[strlen(cadena)];
+	const size_t tam = strlen(cadena);
+	char copia[tam];
 	strcpy(copia,cadena);	
 	coord_t coord = {atoi(strtok(copia,delim)),atoi(strtok(NULL,delim))};
 	return coord;

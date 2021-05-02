@@ -14,11 +14,15 @@ const char* CUADRANTES = "NO no NE ne SO so SE se";
 const char* RESPUESTAS = "Y YES Yes yes SI Si si";
 enum {AGUA=1,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
 
-
+/*
+Pre: recibe una cadena a transformar
+Post: convierte todos sus caracteres a mayusculas
+*/
 void mayuscula(string &cadena){
-    char copia[cadena.length()];
+    const size_t tam = cadena.length();
+	char copia[tam];
     strcpy(copia,cadena.c_str());
-	for(size_t i=0;i<cadena.length();i++)
+	for(size_t i=0;i<tam;i++)
 		copia[i] = ((int)copia[i]>=(int)'a'&&(int)copia[i]<=(int)'z')?(char)((int)'A'+((int)copia[i]-(int)'a')):copia[i];
     cadena=copia;
 }
@@ -43,7 +47,8 @@ Pre: una cadena de texto con la informacion y un delimitador a usar
 Post: separa la cadena con el delimitador y cuenta cuantas cadenas existen.
 */
 size_t obtener_cant_division(const char info[],const char *delim){
-	char copia[strlen(info)];
+	const size_t tam=strlen(info);
+	char copia[tam];
 	strcpy(copia,info);
 	size_t cantidad=0;
 	char *palabra=strtok(copia,delim);
@@ -57,7 +62,8 @@ Pre: una cadena de texto con la informacion, un delimitador, la cantidad de divi
 Post: guarda en el vector de cadenas cada division realizada del texto con el delimitador la cantidad solicitada por parametro
 */
 void dividir(const char texto[],const char *delim,const size_t cantidad,char divisiones[][MAX_DATOS]){
-	char copia[strlen(texto)];
+	const size_t tam = strlen(info);
+	char copia[tam];
 	strcpy(copia,texto);
 	strcpy(divisiones[0],strtok(copia,delim));
 	for(size_t i=1;i<cantidad;i++)
@@ -86,15 +92,12 @@ bool buscar(datos_t datos,string cuadrante,int opcion){
     return false;
 }
 /*
-Pre:
-Post: interfaz del usuario, encargada de recoger la informacion del cuadrante
+Pre: 
+Post: interfaz del usuario, encargada de devolver la informacion del cuadrante
 */
-void mostrar_menu(const datos_t datos){
-    string respuesta="Si";
-    while(strstr(RESPUESTAS,respuesta.c_str())){
-		string cuadrante="NADA";    
-		cout<<"\t-----MENU-----"<<endl;
-	    while(cuadrante.length()>2||!strstr(CUADRANTES,cuadrante.c_str())){
+string pedir_cuadrante(){
+	string cuadrante="NADA";    
+	while(cuadrante.length()>2||!strstr(CUADRANTES,cuadrante.c_str())){
 	        cout<<"\nIngrese el cuadrante donde quiere preguntar:\n";
 	        cout<<"\tNO : Norte Oeste \n";
 	        cout<<"\tNE : Norte Este \n";
@@ -102,9 +105,18 @@ void mostrar_menu(const datos_t datos){
 	        cout<<"\tSE : Sur Este \n\n";
 	        cin>>cuadrante;
 	        cin.ignore();
-	    }
-	    string elemento="NINGUNO";
-	    while(elemento.length()>2||atoi(elemento.c_str())>12||atoi(elemento.c_str())<1){
+	        if(cuadrante.length()>2||!strstr(CUADRANTES,cuadrante.c_str()))
+	        	cout<<"Debe ingresar los caracteres correctos: (NO, NE, SO, SE)"<<endl;
+	}
+	return cuadrante
+}
+/*
+Pre: 
+Post: interfaz del usuario, encargada de devolver la informacion del personaje
+*/
+int pedir_elemento(){
+	string elemento="NINGUNO";
+	while(elemento.length()>2||atoi(elemento.c_str())>12||atoi(elemento.c_str())<1){
 	        cout<<"Ingrese el digito por el elemento que desea consultar:\n";
 	        cout<<"\t01) Agua \n";
 	        cout<<"\t02) Bala \n";
@@ -119,9 +131,24 @@ void mostrar_menu(const datos_t datos){
 	        cout<<"\t11) Vampiro Nosferatu \n";
 	        cout<<"\t12) Zombi \n\n";
 	        cin>>elemento;
-	        cin.ignore();
-	    }
-	    cout<<(buscar(datos,cuadrante,atoi(elemento.c_str()))?"\tSE ENCONTRO":"\tNO SE ENCONTRO")<<endl;
+	        cin.ignore(); 
+			if(elemento.length()>2||atoi(elemento.c_str())>12||atoi(elemento.c_str())<1)  
+				cout<<"Debe ingresar un numero comprendido entre 1 y 12"<<endl;
+	}
+	return atoi(elemento.c_str());
+}
+/*
+Pre:
+Post: interfaz del usuario, encargada de recoger y procesar la informacion
+*/
+void mostrar_menu(const datos_t datos){
+    string respuesta="Si";
+    while(strstr(RESPUESTAS,respuesta.c_str())){
+		
+		cout<<"\t-----MENU-----"<<endl;
+		string cuadrante = pedir_cuadrante();
+	    int elemento=pedir_elemento();
+	    cout<<(buscar(datos,cuadrante,elemento)?"\tSE ENCONTRO ":"\tNO SE ENCONTRO ")<<"EN EL CUADRANTE"<<cuadrante<<endl;
 	    cout<<"Desea repetir la operacion? (S/N): "<<endl;
 		cin>>respuesta;
 		cin.ignore();
