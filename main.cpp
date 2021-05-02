@@ -7,7 +7,7 @@ const char *nombre_archivo = "estado.txt";
 
 int main() {
   	
-  	datos_t datos;
+    datos_t datos;
   	
   	inicializar_datos(&datos);
   	if(!cargar_datos_fichero(&datos,nombre_archivo)){
@@ -17,7 +17,6 @@ int main() {
 	mostrar_resumen(datos);
   	cout<<"Presione una tecla para continuar...";
 	cin.get();
-	system("clear");
 	mostrar_menu(datos);
   	
   	eliminar_arrays(&datos);

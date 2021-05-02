@@ -80,11 +80,14 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 bool buscar_humano(datos_t datos,string cuadrante,const char *nombre_humano){
 	int i=0;bool encontrado=false;
 	bool cazador = !strcmp(nombre_humano,"cazador");
-	while(!encontrado&&i++<datos.cantidad_humanos)
-		encontrado=	cazador&&
-					datos.humanos[i].cazador&&
-					!strcmp(datos.humanos[i].cuadrante,cuadrante.c_str())&&
-					!strcmp(datos.humanos[i].nombre,nombre_humano);
+	while(!encontrado&&i<datos.cantidad_humanos){
+        if(cazador)		
+            encontrado=datos.humanos[i].cazador;
+        else		        
+            encontrado=!strcmp(datos.humanos[i].nombre,nombre_humano);
+        encontrado=encontrado&&!strcmp(datos.humanos[i].cuadrante,cuadrante.c_str());
+        i++;
+        }
 	return encontrado;
 }
 /*
@@ -93,8 +96,10 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 */
 bool buscar_vampiro(datos_t datos,string cuadrante,const char *nombre_vampiro){
 	int i=0;bool encontrado=false;
-	while(!encontrado&&i++<datos.cantidad_vampiros)
+	while(!encontrado&&i<datos.cantidad_vampiros){
 		encontrado=!strcmp(datos.vampiros[i].cuadrante,cuadrante.c_str())&&!strcmp(datos.vampiros[i].nombre,nombre_vampiro);
+    i++;
+    }
 	
 	return encontrado;
 }
@@ -140,13 +145,13 @@ Pre: un puntero con la informacion de los arrays previamente cargados
 Post: libera la memoria y posiciona los punteros a una direccion nula
 */
 void eliminar_arrays(datos_t *datos){
-	delete datos->humanos;
-	delete datos->vampiros;
-	delete datos->zombis;
-	delete datos->aguas;
-	delete datos->balas;
-	delete datos->escopetas;
-	delete datos->cruces;
+	delete[] datos->humanos;
+	delete[] datos->vampiros;
+	delete[] datos->zombis;
+	delete[] datos->aguas;
+	delete[] datos->balas;
+	delete[] datos->escopetas;
+	delete[] datos->cruces;
 	
 	datos->aguas=NULL;
 	datos->balas=NULL;

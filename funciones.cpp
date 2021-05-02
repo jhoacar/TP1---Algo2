@@ -62,7 +62,7 @@ Pre: una cadena de texto con la informacion, un delimitador, la cantidad de divi
 Post: guarda en el vector de cadenas cada division realizada del texto con el delimitador la cantidad solicitada por parametro
 */
 void dividir(const char texto[],const char *delim,const size_t cantidad,char divisiones[][MAX_DATOS]){
-	const size_t tam = strlen(info);
+	const size_t tam = strlen(texto);
 	char copia[tam];
 	strcpy(copia,texto);
 	strcpy(divisiones[0],strtok(copia,delim));
@@ -74,7 +74,6 @@ Pre: datos previamente cargados, una cadena con el cuadrante a buscar y la opcio
 Post: devuelve verdadero si encuentra el objeto con el cuadrante y falso en caso contrario
 */
 bool buscar(datos_t datos,string cuadrante,int opcion){
-	mayuscula(cuadrante);
 	switch(opcion){
     	case AGUA: 				return buscar_agua(datos,cuadrante);
     	case BALA: 				return buscar_bala(datos,cuadrante);
@@ -84,7 +83,7 @@ bool buscar(datos_t datos,string cuadrante,int opcion){
     	case HUMANO: 			return buscar_humano(datos,cuadrante,"humano");
     	case HUMANO_CAZADOR: 	return buscar_humano(datos,cuadrante,"cazador");
     	case VANESA: 			return buscar_humano(datos,cuadrante,"Vanesa");
-    	case VAMPIRO: 			return buscar_vampiro(datos,cuadrante,"Vampiro");
+    	case VAMPIRO: 			return buscar_vampiro(datos,cuadrante,"vampiro");
     	case VAMPIRELLA:		return buscar_vampiro(datos,cuadrante,"Vampirella");
     	case NOSFERATU:			return buscar_vampiro(datos,cuadrante,"Nosferatu");
     	case ZOMBIE:			return buscar_zombie(datos,cuadrante);
@@ -105,10 +104,11 @@ string pedir_cuadrante(){
 	        cout<<"\tSE : Sur Este \n\n";
 	        cin>>cuadrante;
 	        cin.ignore();
-	        if(cuadrante.length()>2||!strstr(CUADRANTES,cuadrante.c_str()))
-	        	cout<<"Debe ingresar los caracteres correctos: (NO, NE, SO, SE)"<<endl;
+	        if(cuadrante.length()>2||!strstr(CUADRANTES,cuadrante.c_str())){
+	        	cout<<"Debe ingresar los caracteres correctos: (NO, NE, SO, SE)"<<endl;system("clear");
+            }
 	}
-	return cuadrante
+	return cuadrante;
 }
 /*
 Pre: 
@@ -132,8 +132,10 @@ int pedir_elemento(){
 	        cout<<"\t12) Zombi \n\n";
 	        cin>>elemento;
 	        cin.ignore(); 
-			if(elemento.length()>2||atoi(elemento.c_str())>12||atoi(elemento.c_str())<1)  
+			if(elemento.length()>2||atoi(elemento.c_str())>12||atoi(elemento.c_str())<1){  
 				cout<<"Debe ingresar un numero comprendido entre 1 y 12"<<endl;
+            system("clear");
+            }
 	}
 	return atoi(elemento.c_str());
 }
@@ -145,13 +147,16 @@ void mostrar_menu(const datos_t datos){
     string respuesta="Si";
     while(strstr(RESPUESTAS,respuesta.c_str())){
 		
+        system("clear");
 		cout<<"\t-----MENU-----"<<endl;
 		string cuadrante = pedir_cuadrante();
+        mayuscula(cuadrante);
 	    int elemento=pedir_elemento();
-	    cout<<(buscar(datos,cuadrante,elemento)?"\tSE ENCONTRO ":"\tNO SE ENCONTRO ")<<"EN EL CUADRANTE"<<cuadrante<<endl;
+	    cout<<(buscar(datos,cuadrante,elemento)?"\tSE ENCONTRO ":"\tNO SE ENCONTRO ")<<"EN EL CUADRANTE "<<cuadrante<<endl;
 	    cout<<"Desea repetir la operacion? (S/N): "<<endl;
 		cin>>respuesta;
 		cin.ignore();
+        system("clear");
 	}
 }
 /*
