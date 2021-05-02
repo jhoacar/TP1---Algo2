@@ -7,8 +7,13 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <string>
 using namespace std;
 
+/*
+Pre: Un nombre del fichero a abrir
+Post: Devuelve la informacion del fichero en formato string
+*/
 string obtener_texto(string nombre_fichero){
 	
 	fstream archivo(nombre_fichero.c_str(), fstream::in );
@@ -21,8 +26,10 @@ string obtener_texto(string nombre_fichero){
   	archivo.close();
   	return datos_texto;
 }
-
-
+/*
+Pre: una cadena de texto con la informacion y un delimitador a usar
+Post: separa la cadena con el delimitador y cuenta cuantas cadenas existen.
+*/
 size_t obtener_cant_division(const char info[],const char *delim){
 	char copia[strlen(info)];
 	strcpy(copia,info);
@@ -33,8 +40,10 @@ size_t obtener_cant_division(const char info[],const char *delim){
 	
 	return cantidad;
 }
-
-
+/*
+Pre: una cadena de texto con la informacion, un delimitador, la cantidad de divisiones y el vector de cadenas a guardar la informacion
+Post: guarda en el vector de cadenas cada division realizada del texto con el delimitador la cantidad solicitada por parametro
+*/
 void dividir(const char texto[],const char *delim,const size_t cantidad,char divisiones[][MAX_DATOS]){
 	char copia[strlen(texto)];
 	strcpy(copia,texto);
@@ -42,7 +51,10 @@ void dividir(const char texto[],const char *delim,const size_t cantidad,char div
 	for(int i=1;i<cantidad;i++)
 		strcpy(divisiones[i],strtok(NULL,delim));
 }
-
+/*
+Pre: datos previamente cargados, una cadena con el cuadrante a buscar y la opcion del menu
+Post: devuelve verdadero si encuentra el objeto con el cuadrante y falso en caso contrario
+*/
 bool buscar(datos_t datos,string cuadrante,int opcion){
 	
 	switch(opcion){
@@ -60,7 +72,10 @@ bool buscar(datos_t datos,string cuadrante,int opcion){
     	case ZOMBIE:			return buscar_zombie(datos,cuadrante);
 	}
 }
-
+/*
+Pre:
+Post: interfaz del usuario, encargada de recoger la informacion del cuadrante
+*/
 void mostrar_menu(const datos_t datos){
     string respuesta="Si";
     while(strstr(RESPUESTAS,respuesta.c_str())){
@@ -99,10 +114,17 @@ void mostrar_menu(const datos_t datos){
 		cin.ignore();
 	}
 }
-
+/*
+Pre: una coordenada cargada
+Post: muestra las coordenadas en un formato especifico
+*/
 void mostrar_coordenada(coord_t coordenada){
 	cout<<"("<<coordenada.x<<","<<coordenada.y<<")"<<endl;
 }
+/*
+Pre:
+Post: muestra la informacion de los datos con un formato especifico
+*/
 void mostrar_resumen(const datos_t datos){
     int suma_agua = obtener_total_agua(datos);
     int suma_balas = obtener_total_balas(datos);
@@ -119,7 +141,10 @@ void mostrar_resumen(const datos_t datos){
     cout<<"ESCOPETAS\t"<<datos.cantidad_escopetas<<"\t\t\t"<<(suma_balas!=0?100*(float)datos.cantidad_escopetas/(float)suma_balas:0)<<endl;
     cout<<"BALAS\t\t"<<suma_balas<<"\t\t\t"<<(datos.cantidad_escopetas!=0?100*(float)suma_balas/(float)datos.cantidad_escopetas:0)<<endl;
 }
-
+/*
+Pre:
+Post: muestra la informacion de los datos con un formato especifico
+*/
 void mostrar_datos(const datos_t datos){
 	
 	cout<<"AGUAS: "<<endl;

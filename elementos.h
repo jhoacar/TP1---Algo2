@@ -1,6 +1,7 @@
 #ifndef ELEMENTOS_H
 #define ELEMENTOS_H
 
+#include <string>
 using namespace std;
 
 const int MAX_NOMBRE = 50;
@@ -18,10 +19,18 @@ typedef struct coord{
 	int y;
 }coord_t;
 
+typedef struct Personaje{
+	string nombre;
+	coord_t coordenada;
+	string cuadrante;
+	string extra;
+}personaje_t;
+
 typedef struct objeto{
 	char nombre[MAX_NOMBRE];
 	coord_t coordenada;
 	char cuadrante[3];
+	char extra[MAX_NOMBRE];
 }objeto_t;
 
 typedef struct humano {

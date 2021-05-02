@@ -10,6 +10,11 @@
 #include <cstring>
 using namespace std;
 
+
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_agua(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_aguas)
@@ -17,6 +22,10 @@ bool buscar_agua(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_bala(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_balas)
@@ -24,6 +33,10 @@ bool buscar_bala(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_cruz(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_cruces)
@@ -31,6 +44,10 @@ bool buscar_cruz(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_estaca(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_estacas)
@@ -38,6 +55,10 @@ bool buscar_estaca(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_escopeta(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_escopetas)
@@ -45,6 +66,10 @@ bool buscar_escopeta(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_zombie(datos_t datos,string cuadrante){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i<datos.cantidad_zombies)
@@ -52,6 +77,10 @@ bool buscar_zombie(datos_t datos,string cuadrante){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_humano(datos_t datos,string cuadrante,const char *nombre_humano){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i++<datos.cantidad_humanos)
@@ -59,6 +88,10 @@ bool buscar_humano(datos_t datos,string cuadrante,const char *nombre_humano){
 	
 	return encontrado;
 }
+/*
+Pre: una estructura de datos cargadas con cuadrante a buscar
+Post: devuelve si encontro el objeto con ese cuadrante en los datos
+*/
 bool buscar_vampiro(datos_t datos,string cuadrante,const char *nombre_vampiro){
 	int i=0;bool encontrado=false;
 	while(!encontrado&&i++<datos.cantidad_vampiros)
@@ -66,7 +99,10 @@ bool buscar_vampiro(datos_t datos,string cuadrante,const char *nombre_vampiro){
 	
 	return encontrado;
 }
-
+/*
+Pre: 
+Post: inicializa todos los punteros y las cantidades a 0
+*/
 void inicializar_datos(datos_t *datos){
 	datos->aguas=NULL;
 	datos->balas=NULL;
@@ -85,6 +121,10 @@ void inicializar_datos(datos_t *datos){
 	datos->cantidad_cruces=0;
 	datos->cantidad_estacas=0;
 }
+/*
+Pre:
+Post: inicializa pidiendo memoria en el heap los vectores de cada objeto
+*/
 void inicializar_arrays(datos_t *datos){
 	
 	datos->humanos	=new humano_t	[datos->cantidad_humanos];
@@ -96,7 +136,10 @@ void inicializar_arrays(datos_t *datos){
 	datos->cruces	=new cruz_t		[datos->cantidad_cruces];
 	
 }
-
+/*
+Pre: un puntero con la informacion de los arrays previamente cargados
+Post: libera la memoria y posiciona los punteros a una direccion nula
+*/
 void eliminar_arrays(datos_t *datos){
 	delete datos->humanos;
 	delete datos->vampiros;
@@ -115,21 +158,31 @@ void eliminar_arrays(datos_t *datos){
 	datos->vampiros=NULL;
 	datos->zombis=NULL;
 }
-
+/*
+Pre: una estructura datos previamente cargada
+Post: devuelve la cantidad de agua que se encuentra en los datos
+*/
 int obtener_total_agua(datos_t datos){
     int suma=0;
     for(int i=0;i<datos.cantidad_aguas;i++)
         suma+=datos.aguas[i].dosis;
     return suma;
 }
+/*
+Pre: una estructura datos previamente cargada
+Post: devuelve la cantidad de balas que se encuentra en los datos
+*/
 int obtener_total_balas(datos_t datos){
     int suma=0;
     for(int i=0;i<datos.cantidad_balas;i++)
         suma+=datos.balas[i].cantidad;
     return suma;
 }
-
-void guardar_objeto(objeto &objeto,char info[]){
+/*
+Pre: un objeto a guardar con la informacion para separarlas en tokens
+Post: guarda la informacion decodificada de la info en el objeto
+*/
+void guardar_objeto(objeto_t &objeto,char info[]){
 	
 	char copia_info[strlen(info)];
 	strcpy(copia_info,info);
@@ -140,8 +193,10 @@ void guardar_objeto(objeto &objeto,char info[]){
 	cargar_coordenada(objeto.coordenada,coordenada);
 	cargar_cuadrante(objeto.cuadrante,objeto.coordenada);	
 }
-
-
+/*
+Pre: un vector de objetos del mismo tamano de la cantidad pasada por parametro y la estructura de los datos a cargar
+Post: carga en los vectores de los datos la informacion de cada uno.
+*/
 void cargar_objetos_a_datos(objeto_t objetos[],size_t cantidad,datos_t *datos){
 	
 	int pos_agua=0;
@@ -185,7 +240,10 @@ void cargar_objetos_a_datos(objeto_t objetos[],size_t cantidad,datos_t *datos){
 		
 	}
 }
-
+/*
+Pre: un vector de objetos del mismo tamano de la cantidad pasada por parametro con la informacion a procesar y la estructura de los datos a guardar
+Post: cuenta la cantidad de objetos que hay con dicha informacion y guarda cada informacion en los objetos y procesa la cantidad que hay en los datos
+*/
 void contar_objetos(objeto_t objetos[],size_t cantidad_info,char info[][MAX_DATOS],datos_t *datos){
 	
 	for(int i=0;i<cantidad_info;i++){
@@ -220,7 +278,10 @@ void contar_objetos(objeto_t objetos[],size_t cantidad_info,char info[][MAX_DATO
 			
 	}
 }
-
+/*
+Pre: un puntero con la estructura de los datos a guardar y el nombre del fichero a buscar la informacion
+Post: procesa la informacion del fichero y la carga a la estructura de datos.
+*/
 bool cargar_datos_fichero(datos_t *datos,const char *nombre_fichero){
 
 	cout<<"Cargando datos..."<<endl;
