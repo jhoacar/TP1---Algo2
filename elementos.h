@@ -1,7 +1,5 @@
 #ifndef ELEMENTOS_H
 #define ELEMENTOS_H
-#include <string>
-using namespace std;
 
 const int MAX_NOMBRE = 50;
 
@@ -9,13 +7,6 @@ typedef struct coord{
 	int x;
 	int y;
 }coord_t;
-
-typedef struct Personaje{
-	string nombre;
-	coord_t coordenada;
-	string cuadrante;
-	string extra;
-}personaje_t;
 
 typedef struct objeto{
 	char nombre[MAX_NOMBRE];
@@ -73,7 +64,7 @@ coord_t obtener_coordenadas(char cadena[],const char *delim);
 
 void cargar_coordenada(coord_t &destino,coord_t origen);
 void cargar_posicion(coord_t &destino,char cuadrante_destino[],coord_t origen,char cuadrante_origen[]);
-void cargar_cuadrante(const char cuadrante[],coord_t coordenada);
+void cargar_cuadrante(char cuadrante[],coord_t coordenada);
 
 bool es_humano(const char nombre[]);
 bool es_zombi(const char nombre[]);

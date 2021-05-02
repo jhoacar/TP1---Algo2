@@ -1,9 +1,7 @@
 #ifndef MANIPULACION_DATOS_CPP
 #define MANIPULACION_DATOS_CPP
 
-#include "manipulacion_datos.h"
 #include "funciones.h"
-#include "elementos.h"
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -81,7 +79,7 @@ Post: devuelve si encontro el objeto con ese cuadrante en los datos
 */
 bool buscar_humano(datos_t datos,string cuadrante,const char *nombre_humano){
 	int i=0;bool encontrado=false;
-	bool cazador = !strcmpi(nombre_humano,"cazador");
+	bool cazador = !strcmp(nombre_humano,"cazador");
 	while(!encontrado&&i++<datos.cantidad_humanos)
 		encontrado=	cazador&&
 					datos.humanos[i].cazador&&
@@ -209,7 +207,7 @@ void cargar_objetos_a_datos(objeto_t objetos[],size_t cantidad,datos_t *datos){
 	int pos_estaca=0;
 	int pos_escopeta=0;
 	
-	for(int i=0;i<cantidad;i++){
+	for(size_t i=0;i<cantidad;i++){
 		
 		char *nombre = strtok(objetos[i].nombre," ");
 		const char *extra = strtok(NULL," ");
@@ -247,7 +245,7 @@ Post: cuenta la cantidad de objetos que hay con dicha informacion y guarda cada 
 */
 void contar_objetos(objeto_t objetos[],size_t cantidad_info,char info[][MAX_DATOS],datos_t *datos){
 	
-	for(int i=0;i<cantidad_info;i++){
+	for(size_t i=0;i<cantidad_info;i++){
 		
 		guardar_objeto(objetos[i],info[i]);
 		

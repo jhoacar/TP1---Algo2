@@ -2,6 +2,8 @@
 #define MANIPULACION_DATOS_H
 
 #include "elementos.h"
+#include <string>
+using namespace std;
 
 const int MAX_DATOS = 100;
 
@@ -27,7 +29,7 @@ typedef struct datos{
 
 void inicializar_datos(datos_t *datos);
 void eliminar_arrays(datos_t *datos);
-bool cargar_datos_fichero(datos_t *datos,char *nombre_fichero);
+bool cargar_datos_fichero(datos_t *datos,const char *nombre_fichero);
 int obtener_total_agua(datos_t datos);
 int obtener_total_balas(datos_t datos);
 

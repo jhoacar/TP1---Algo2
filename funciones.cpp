@@ -10,9 +10,17 @@
 #include <string>
 using namespace std;
 
+const char* CUADRANTES = "NO no NE ne SO so SE se";
+const char* RESPUESTAS = "Y YES Yes yes SI Si si";
+enum {AGUA=1,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
+
+
 void mayuscula(string &cadena){
+    char copia[cadena.length()];
+    strcpy(copia,cadena.c_str());
 	for(size_t i=0;i<cadena.length();i++)
-		cadena[i] = (cadena[i]>='a'&&cadena[i]<='z')?'A'+(cadena[i]-'a'):cadena[i];
+		copia[i] = ((int)copia[i]>=(int)'a'&&(int)copia[i]<=(int)'z')?(char)((int)'A'+((int)copia[i]-(int)'a')):copia[i];
+    cadena=copia;
 }
 /*
 Pre: Un nombre del fichero a abrir
@@ -52,7 +60,7 @@ void dividir(const char texto[],const char *delim,const size_t cantidad,char div
 	char copia[strlen(texto)];
 	strcpy(copia,texto);
 	strcpy(divisiones[0],strtok(copia,delim));
-	for(int i=1;i<cantidad;i++)
+	for(size_t i=1;i<cantidad;i++)
 		strcpy(divisiones[i],strtok(NULL,delim));
 }
 /*
@@ -75,6 +83,7 @@ bool buscar(datos_t datos,string cuadrante,int opcion){
     	case NOSFERATU:			return buscar_vampiro(datos,cuadrante,"Nosferatu");
     	case ZOMBIE:			return buscar_zombie(datos,cuadrante);
 	}
+    return false;
 }
 /*
 Pre:

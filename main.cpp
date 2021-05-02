@@ -1,9 +1,5 @@
 #include "funciones.h"
-#include "funciones.cpp"
-#include "manipulacion_datos.h"
-#include "manipulacion_datos.cpp"
 #include <iostream>
-#include <cstring>
 using namespace std;
 
 const char *nombre_archivo = "estado.txt";
