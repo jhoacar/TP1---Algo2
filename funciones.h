@@ -1,8 +1,5 @@
 #ifndef FUNCIONES_H   
 #define FUNCIONES_H
-
-#include <string>
-
 #include "manipulacion_datos.h"
 
 string obtener_texto(string nombre_fichero);
