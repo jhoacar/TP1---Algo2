@@ -4,8 +4,6 @@
 #include "funciones.h"
 #include <iostream>
 #include <cstring>
-using namespace std;
-
 
 /*
 Pre: una estructura de datos cargadas con cuadrante a buscar
