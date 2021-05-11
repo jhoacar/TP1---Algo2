@@ -12,15 +12,29 @@ const char* RESPUESTAS = "Y YES Yes yes SI Si si";
 enum {AGUA=1,BALA,CRUZ,ESTACA,ESCOPETA,HUMANO,HUMANO_CAZADOR,VANESA,VAMPIRO,VAMPIRELLA,NOSFERATU,ZOMBIE};
 
 /*
+Pre: recibe un caracter
+Post: devuelve si es minuscula o no
+*/
+bool es_minuscula(char letra){
+	return (int)letra>=(int)'a'&&(int)letra<=(int)'z';
+}
+
+/*
 Pre: recibe una cadena a transformar
 Post: convierte todos sus caracteres a mayusculas
-*/
+*/	
+
 void mayuscula(string &cadena){
     const size_t tam = cadena.length();
 	char copia[tam];
     strcpy(copia,cadena.c_str());
-	for(size_t i=0;i<tam;i++)
-		copia[i] = ((int)copia[i]>=(int)'a'&&(int)copia[i]<=(int)'z')?(char)((int)'A'+((int)copia[i]-(int)'a')):copia[i];
+	for(size_t i=0;i<tam;i++){
+		int inicio = (int)'A';
+		int diferencia = (int)copia[i]-(int)'a';
+		copia[i] = es_minuscula(copia[i])? (char)(inicio+diferencia):copia[i];
+		//Por cada letra que se encuentra entre la 'a' y la 'z' la trasladamos hacia la 'A' y la 'Z' con el uso del codigo ASCII.
+		//Se realizan las conversiones a enteros para poder sumar y comparar sin ningun problema.
+	}
     cadena=copia;
 }
 /*
