@@ -1,5 +1,5 @@
 Compilacion:
-g++ *.c -o TP1 -g -std=c++11 -Wall -Wconversion -Wtype -limits -Werror -O0
+g++ *.cpp -o TP1 -g -std=c++11 -Wall -Wconversion -Wtype -limits -Werror -O0
 
 Ejecucion (Valgrind):
 
