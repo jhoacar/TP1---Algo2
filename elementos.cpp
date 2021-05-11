@@ -177,19 +177,19 @@ void cargar_vampiro(objeto_t objeto,vampiro_t &vampiro){
 	cargar_posicion(vampiro.coordenada,vampiro.cuadrante,objeto.coordenada,objeto.cuadrante);
 }
 /*
-Pre: una cadena con la informacion a extraer, un objeto cargado y una estructura de agua a cargar
-Post: carga la informacion del objeto al agua con la informacion extra de la cadena
+Pre: una cadena con la cantidad de agua, un objeto cargado y una estructura de agua a cargar
+Post: carga la informacion del objeto al agua con la cantidad de agua
 */
-void cargar_agua(const char info[],objeto_t objeto,agua_t &agua){
-	agua.dosis=atoi(info);
+void cargar_agua(const char cantidad_agua[],objeto_t objeto,agua_t &agua){
+	agua.dosis=atoi(cantidad_agua);
 	cargar_posicion(agua.coordenada,agua.cuadrante,objeto.coordenada,objeto.cuadrante);
 }
 /*
-Pre: una cadena con la informacion a extraer, un objeto cargado y una estructura de bala a cargar
-Post: carga la informacion del objeto a la bala con la informacion extra de la cadena
+Pre: una cadena con la cantidad de balas, un objeto cargado y una estructura de bala a cargar
+Post: carga la cantidad de balas a la bala con la informacion del objeto
 */
-void cargar_bala(const char info[],objeto_t objeto,bala_t &bala){
-	bala.cantidad=atoi(info);
+void cargar_bala(const char cantidad_balas[],objeto_t objeto,bala_t &bala){
+	bala.cantidad=atoi(cantidad_balas);
 	cargar_posicion(bala.coordenada,bala.cuadrante,objeto.coordenada,objeto.cuadrante);
 }
 /*
